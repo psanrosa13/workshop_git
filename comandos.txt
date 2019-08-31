@@ -116,3 +116,5 @@ git show [hash do commit ] = mostra muitas informações sobre o commit como por
 
 git cherry-pick [hash do commit]= envia um commit de uma branch para outra
 git merge [nome da branch ] = usado para mesclar uma ramificação na sua branch 
+
+Adeus
