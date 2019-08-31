@@ -1,0 +1,118 @@
+Artigo explicativo 
+https://rogerdudler.github.io/git-guide/index.pt_BR.html
+https://woliveiras.com.br/posts/comandos-mais-utilizados-no-git/
+
+Comandos GIT
+git clone = Ao realizarmos a clonagem, uma cópia de todo o repositório remoto é criada em nossa máquina. Todos os arquivos, tags, histórico, branches e assim por diante ficam disponíveis localmente na máquina do desenvolvedor. 
+git tag = visualizar tags de um projeto
+git checkout numero_versao = volta o projeto para o estado de uma tag
+git diff tag1 tag2 = com esse comando serão exibidas as diferenças entre uma tag e outra 
+git blame nomearquivo = mostra linha a linha quem realizou as alterações
+git init = faz com que o git comece a gerenciar um pasta
+git ls-files = exibe os arquivos do repositório
+git status = mostra o status atual do seu repositório
+git add nomearquivo (ou * para todos) = adiciona o arquivo para ser comitado
+git config user.name "João Carlos Fonseca" = comando para configurar usuário no projeto
+git config user.email "jcfonsecagit@gmail.com" = comando para configurar e-mail no projeto 
+git config --global user.name "João Carlos Fonseca" = configurar usuário para todos os projetos
+git config --global user.email "jcfonsecagit@gmail.com" configurar email para todos os projetos 
+
+*******Para não precisar configurar email e usuário você pode gerar a chave SSH e implementar no seu repositório remoto, este processo pode diferenciar de acordo com seu repositório remoto.
+
+git commit -m "Início do projeto" = commit local dos arquivos adicionados .A flag "-m", indica que o conteúdo a seguir é a mensagem que será utilizada para descrever o que está sendo feito no commit
+
+git add arquivo1 arquivo2 = Você pode adicionar arquivos específicos passando cada um como um parâmetro, separando cada arquivo por um espaço!
+
+git add caminhoDeUmDiretorio = Você pode adicionar um diretório inteiro passando como parâmetro do comando git add o caminho do diretório!
+
+git add . = O caminho git add . funciona do mesmo modo que passar o caminho de um diretório, pois o atalho . representa o diretório atual. Portanto, serão adicionados todos os arquivos que estiverem dentro do diretório atual!
+
+git add -i = modo interativo inicia um prompt de comando específico, aguardando as decisões do usuário sobre quais as alterações detectadas no working directory devem ser adicionadas ao index.
+
+git commit -a -m 'Mensagem de commit' = inclui imediatamente no commit todos os arquivos modificados ou removidos! Porém, ela não adiciona os arquivos novos. 
+
+***************************************************************************************************************************
+Recapitulação do processo
+Durante o ciclo básico que demonstramos anteriormente, nós interagimos com 3 estágios diferentes do repositório. O primeiro deles enquanto nós criamos o repositório, mas não indicamos nenhum arquivo para ser rastreado.
+Nesse estágio, estamos interagindo com um estado do projeto que chamamos de "Working Directory", ou seja, é o nosso sistema de arquivos atual. Nele estão as alterações que estamos realizando no momento.
+O Working Directory pode estar "limpo", quando não há diferença entre os arquivos armazenados no repositório e como estão atualmente. Quando há diferença (por exemplo, alteramos determinado arquivo, mesmo que uma alteração mínima), o Working Directory fica marcado como "sujo".
+Em nosso caso o arquivo não existia para se ter uma comparação, pois tínhamos um repositório novo. Após modificarmos nossos arquivos a ponto de definirmos que um "passo" foi concluído, criamos uma visão desse passo, um ponto de controle preliminar com o comando "git add".
+Esse comando cria um novo estágio do repositório, o que chamamos de "Index" ou "Staging Area". Esse estágio é transitório e pode ser alterado ainda antes de se tornar um passo do projeto: podemos adicionar novos arquivos, removê-los ou mesmo alterá-los.
+Quando satisfeitos com o conteúdo do "Index", utilizamos o comando "git commit" para persistí-lo, gravar esse passo com todos os arquivos novos e alterações efetuadas. O comando "commit" criou um terceiro estágio do repositório que conhecemos como "HEAD". O HEAD é o último estado que o Git usa como referência, é a visão do último passo do projeto que foi concluído e entregue.
+
+Quais os estados possíveis?
+Os três estados de um repositório com os quais interagimos ao realizar o fluxo de controle com o Git são:
+Working directory representa o estado atual dos arquivos no repositório. Podemos utilizar o comando git add para adicioná-los ao index, ou staging area, que representa uma visão preliminar das modificações que queremos definir para nosso projeto, comparando essas ao HEAD, o último passo completo do nosso projeto, que serve de referência para comparação do trabalho com o working directory.
+***************************************************************************************************************************
+
+git remote add [alias_do_repositorio] [uri_do_repositorio] = indicar que o diretório do nosso projeto apontará para um repositório remoto
+git push origin master = enviar os commits locais para o remoto, indicando qual é o repositório remoto para onde os commits serão enviados e a branch que será enviada para o servidor
+
+*******************************************************************************************************************
+Ao clonar um repositório, não precisamos adicionar o repositório remoto através do comando git remote add, pois tudo já é feito pelo comando git clone, dando um alias "origin" para o repositório.
+************************************************************************************************************************
+
+git pull origin master = pega do repositório remoto as atualizações do projeto
+git log = log sobre todos os commits realizados
+git whatchanged  = log de detalhes dos commits
+git whatchanged -p =  é possível visualizar quais as linhas que foram modificadas em cada commit do nosso projeto. Obs: também é possível utilizarmos git log -p, que imprime também os commits nos quais não houve modificação.
+
+*******************************************************************************************************************************
+Ao executar o comando git log, note que ele é extremamente rápido, pois, quando clonamos o repositório, todas as informações dele estão localmente em nosso computador, ou seja, não precisamos acessar nada de fora de nossa máquina.
+*******************************************************************************************************************************
+
+git branch [nome da branch] = fornece todas as branches criadas na máquina
+git checkout [nome da branch que deseja mudar ] = mudar de branch local 
+git checkout [nome da branch que deseja mudar ] -b = ele cria a branch e já acessa ela
+git fetch origin = mostra todas as atualizações que foram realizadas no repositório referente ao origin
+git push origin [nome da branch] = quando sua branch esta só local e você deseja enviar os dados para uma branch remota
+git branch -r = exibe as branchs existentes no repositório remoto
+git branch -t [nome da branch local] origin/[nome da branch remota] = trazer uma branch remota para local
+git branch -d [nome da branch local] = remove uma branch local se ela estiver sincronizada , se não estiver precisa do -D 
+git push origin :design ou git branch -d origin/[nome da branch local] = comando para deletar remoto 
+git push -u origin design = cria a branch remota design no repositório referente ao origin e criamos uma ligação entre a nossa branch e a branch remota.
+git push -a = exibe tanto as branchs locais quanto remotas
+
+**************************************************************************************************************************************
+O Git utiliza os caracteres >, < e =. Entre o < e o = fica o conteúdo antigo e entre o > e = fica o conteúdo novo.
+
+O processo de merge muitas vezes pode ser confuso, demorado e trabalhoso. Justamente por isso, muitos desenvolvedores não gostam de fazê-lo e alguns deles inclusive possuem técnicas para minimizar a quantidade de conflitos que se gera em um projeto ou até mesmo simplificá-los como por exemplo :
+1 - Pequenos commits, com conteúdo reduzido, gerarão conflitos menores e menos trabalhosos. 
+2 - Ao sincronizar com bastante frequência o repositório, é mais fácil evitar conflitos ou minimizar o trabalho de mescla dos conflitos, pois seu repositório local estará sempre atualizado.
+
+O comando git mergetool --tool-help mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
+**************************************************************************************************************************************
+
+git rebase [nome da brach que quere jogar na que você esta] = rebase faz com que uma branch 
+git rebase --skip = descartar o seu commit atual que gera o conflito
+git rebase --abort = voltar ao ponto que se estava antes de realizar o rebase
+git rebase --continue = continuar o rebase
+
+
+**************************************************************************************************************************************
+Se simplesmente jogássemos o conteúdo da branch "desenvolvimento" para a master, poderíamos ter que tratar conflitos de vários commits ao mesmo tempo além do log dos commits ficarem confusos. Justamente para evitar essa situação, o Git possui o comando git rebase, onde podemos indicar qual é a nova base de commits que deve ser utilizada e resolver os conflitos commit por commit. No nosso caso, queremos que a branch "desenvolvimento" utilize como base de commits a "master" que acabamos de atualizar.
+Para isso, temos que ir à branch "desenvolvimento" com o comando git checkout desenvolvimento e dizer que a nova base dela é o último commit que está na master, portanto git rebase master. Nesse instante, os commits feitos em "desenvolvimento" são movidos para uma branch temporária e o git atualiza a nova base de commits. Após essa atualização, o próprio Git traz de volta os commits que realizamos e os aplica sobre a nova base, um de cada vez.
+
+Quando estamos no meio do processo de rebase, e houve um conflito que devemos tratar manualmente, como se chama a branch temporária para a qual somos movidos?
+A branch (no branch), que dá a entender que você não está em branch nenhuma, é apenas temporária, criada pelo Git para que possamos resolver o conflito.
+**************************************************************************************************************************************
+
+git checkout [nome do arquivo] = desfaz as alterações no arquivo ( só se ele ainda não estiver no stangin e no index)
+git reset HEAD [nome do arquivo] = desfaz as alterações que já foram adicionadas ao index no último commit
+git reset [hash do commit] = reverter o head para um ponto específico da pilha de commits
+git revert [hash do commit] = voltar um commit específico ( obs : Para que o comando seja utilizado, é necessário que o Working Directory e o Index estejam "limpos", ou as alterações atuais serão descartadas.)
+git stash = salvar as alterações temporáriamente em local reservado no git que possibilita que você trabalhe a parte .
+git stash pop = pega novamente as alterações que foram salvas na stash
+git stash list = lista todos os stashes salvos no momento com o comando 
+
+**************************************************************************************************************************************
+
+O comando git stash pop utiliza como padrão o último stash criado. Para aplicar alterações de um stash mais antigo, usamos sua referência: git stash pop stash@{1}
+
+**************************************************************************************************************************************
+
+git bisect = comando realizado para busca de commits ( quando tem um histórico grande )
+git show [hash do commit ] = mostra muitas informações sobre o commit como por exemplo o que foi alterado
+
+git cherry-pick [hash do commit]= envia um commit de uma branch para outra
+git merge [nome da branch ] = usado para mesclar uma ramificação na sua branch 
